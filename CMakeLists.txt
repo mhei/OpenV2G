@@ -9,6 +9,7 @@ set(OPENV2G_MAJOR_VERSION 0)
 set(OPENV2G_MINOR_VERSION 9)
 set(OPENV2G_PATCH_VERSION 3)
 set(VERSION ${OPENV2G_MAJOR_VERSION}.${OPENV2G_MINOR_VERSION}.${OPENV2G_PATCH_VERSION})
+set(SOVERSION 0)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/openv2g.pc.cmakein ${CMAKE_CURRENT_BINARY_DIR}/openv2g.pc @ONLY)
 
@@ -16,6 +17,7 @@ include_directories(src/appHandshake src/codec src/din src/transport src/xmldsig
 
 file(GLOB SRC_FILES src/appHandshake/* src/codec/* src/din/* src/transport/* src/xmldsig/*)
 add_library(openv2g SHARED ${SRC_FILES})
+set_target_properties(openv2g PROPERTIES SOVERSION ${SOVERSION})
 
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 install(FILES openv2g.pc DESTINATION lib/pkgconfig)
